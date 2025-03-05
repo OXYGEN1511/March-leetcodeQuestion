@@ -1,0 +1,13 @@
+class Solution {
+    public long coloredCells(int n) {
+        long sum=1;
+        int count =4;
+        for(int i=2;i<=n;i++){
+            sum+=count;
+            count+=4;
+        }
+
+       
+        return sum;
+    }
+}
