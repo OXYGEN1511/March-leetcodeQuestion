@@ -1,0 +1,28 @@
+class Solution {
+    public int[] closestPrimes(int left, int right) {
+        int gap = -1, min = Integer.MAX_VALUE;
+        int prime1 = -1, prime2 = -1;
+
+        for (int i = left; i <= right; i++) {
+            if (checkPrime(i)) {
+                if (gap != -1 && i - gap < min) {
+                    min = i - gap;
+                    prime1 = gap;
+                    prime2 = i;
+                }
+                gap = i;
+            }
+        }
+        return (prime1 == -1) ? new int[]{-1, -1} : new int[]{prime1, prime2};
+    }
+
+    static boolean checkPrime(int nums) {
+        if (nums < 2) return false;
+        for (int i = 2; i * i <= nums; i++) {
+            if (nums % i == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
