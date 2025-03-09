@@ -6,7 +6,7 @@ class Solution {
         int prev=-1;
         while(i<colors.length && j<colors.length+k){
             int mod=j%colors.length;
-            if(colors[end]==prev){
+            if(colors[mod]==prev){
                 i=j;
             }
             if(j-i+1==k){
@@ -14,7 +14,7 @@ class Solution {
                 i++;
             }
             j++;
-            prev=colors[end];
+            prev=colors[mod];
             
         }
         return ans;
