@@ -1,3 +1,4 @@
+//THis is brute force approach
 // class Solution {
 //     public int numberOfSubstrings(String s) {
 //         int count=0;
@@ -18,17 +19,18 @@
 
 //     }
 // }
+
+//THIS IS SLIDING WINDOW APPROACH
 class Solution {
     public int numberOfSubstrings(String s) {
-        int[] count = new int[3]; // To count occurrences of 'a', 'b', 'c'
-        int left = 0, result = 0;
+        int[] count = new int[3]; 
+            int left = 0, result = 0;
 
         for (int right = 0; right < s.length(); right++) {
-            count[s.charAt(right) - 'a']++; // Increase count for current character
-
-            while (count[0] > 0 && count[1] > 0 && count[2] > 0) { // All three chars exist
-                result += s.length() - right; // Add remaining substrings
-                count[s.charAt(left) - 'a']--; // Shrink window
+            count[s.charAt(right) - 'a']++; 
+            while (count[0] > 0 && count[1] > 0 && count[2] > 0) { 
+            result += s.length() - right; // Add remaining substrings
+                count[s.charAt(left) - 'a']--; 
                 left++;
             }
         }
