@@ -1,0 +1,57 @@
+// class Solution {
+//     public int maximumCount(int[] nums) {
+//             int negCount =0;
+//             int posCount=0;
+
+//             for(int i=0;i<nums.length;i++){
+//                 if(nums[i]>0){
+//                     posCount++;
+//                 }else if(nums[i]<0){
+//                     negCount++;
+//                 }
+
+//             }
+
+//             int max = (int)Math.max(posCount,negCount);
+
+//             return max;
+
+//     }
+// }
+
+///By binary search///
+
+class Solution {
+    public int maximumCount(int[] nums) {
+        int negCount = findFirstPositive(nums);  // Count of negative numbers
+        int posCount = nums.length - findFirstNonNegative(nums);  // Count of positive numbers
+        
+        return Math.max(negCount, posCount);
+    }
+
+    private int findFirstPositive(int[] nums) {
+        int left = 0, right = nums.length - 1;
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            if (nums[mid] >= 0) { // Move left if non-negative
+                right = mid - 1;
+            } else {
+                left = mid + 1;
+            }
+        }
+        return left; // First positive index = count of negatives
+    }
+
+    private int findFirstNonNegative(int[] nums) {
+        int left = 0, right = nums.length - 1;
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            if (nums[mid] > 0) { // Move left if positive
+                right = mid - 1;
+            } else {
+                left = mid + 1;
+            }
+        }
+        return left; // First non-negative index
+    }
+}
