@@ -1,0 +1,30 @@
+class Solution {
+    public int minCapability(int[] a, int k) {
+        int n = a.length;
+        int low = Integer.MAX_VALUE;
+
+        for(int  x: a) low = Math.min(low, x);
+        int high = 0;
+        for(int x: a) high = Math.max(high, x);
+
+        int ans = 0;
+        while(high >= low){
+            int mid = (low + high) / 2;
+            int max = 0;
+
+            for(int i = 0; i < n ;i++){
+                if(a[i] <= mid){
+                    i++;
+                    max++;
+                }
+            }
+
+            if(max >= k){
+                high = mid - 1;
+                ans = mid;
+            }
+            else low = mid + 1;
+        }
+        return ans;       
+    }
+}
